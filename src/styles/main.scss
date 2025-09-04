@@ -1,0 +1,7 @@
+// Abstract utilities (variables, mixins, functions)
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+// Base styles (reset, global variables)
+@use 'base/variables';
+@use 'base/reset';

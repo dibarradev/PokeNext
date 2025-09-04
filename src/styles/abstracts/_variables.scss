@@ -1,0 +1,55 @@
+// Color variables
+$colors: (
+  primary: (
+    light: #ffffff,
+    dark: #0a0a0a,
+  ),
+  secondary: (
+    light: #171717,
+    dark: #ededed,
+  ),
+  gray: (
+    light-rgb: 0 0 0,
+    dark-rgb: 255 255 255,
+  ),
+  button: (
+    primary-hover-light: #383838,
+    primary-hover-dark: #ccc,
+    secondary-hover-light: #f2f2f2,
+    secondary-hover-dark: #1a1a1a,
+  )
+);
+
+// Breakpoints
+$breakpoints: (
+  mobile: 600px,
+  tablet: 768px,
+  desktop: 1024px,
+  large: 1200px,
+);
+
+// Spacing values
+$spacing: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+  xxl: 64px,
+  xxxl: 80px,
+);
+
+// Typography scales
+$font-sizes: (
+  small: 14px,
+  base: 16px,
+  lg: 18px,
+  xl: 20px,
+  xxl: 24px,
+);
+
+$line-heights: (
+  tight: 1.2,
+  base: 1.5,
+  relaxed: 1.8,
+);
