@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.toggle {
+  display: flex;
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  //min-width: 106px;
+}
+
+.button {
+  padding: 6px $spacing-md;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xl;
+
+  &:hover {
+    background: var(--background-hover);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: var(--primary);
+    color: var(--white);
+
+    &:hover {
+      background: var(--primary-dark);
+    }
+  }
+}

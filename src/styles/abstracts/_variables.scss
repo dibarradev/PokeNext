@@ -1,55 +1,132 @@
-// Color variables
-$colors: (
-  primary: (
-    light: #ffffff,
-    dark: #0a0a0a,
-  ),
-  secondary: (
-    light: #171717,
-    dark: #ededed,
-  ),
-  gray: (
-    light-rgb: 0 0 0,
-    dark-rgb: 255 255 255,
-  ),
-  button: (
-    primary-hover-light: #383838,
-    primary-hover-dark: #ccc,
-    secondary-hover-light: #f2f2f2,
-    secondary-hover-dark: #1a1a1a,
-  ),
+// Color variables - Individual declarations
+$primary-light: #ffffff;
+$primary-dark: #0a0a0a;
+$secondary-light: #171717;
+$secondary-dark: #ededed;
+$pokemon-gradient: var(--pokemon-gradient-opacity);
+
+// Pokemon type colors - Keep as map for @each loops
+$pokemon-types: (
+  normal: #a8a878,
+  fire: #f08030,
+  water: #6890f0,
+  electric: #f8d030,
+  grass: #78c850,
+  ice: #98d8d8,
+  fighting: #c03028,
+  poison: #a040a0,
+  ground: #e0c068,
+  flying: #a890f0,
+  psychic: #f85888,
+  bug: #a8b820,
+  rock: #b8a038,
+  ghost: #705898,
+  dragon: #7038f8,
+  dark: #705848,
+  steel: #b8b8d0,
+  fairy: #ee99ac,
 );
 
-// Breakpoints
-$breakpoints: (
-  mobile: 600px,
-  tablet: 768px,
-  desktop: 1024px,
-  large: 1200px,
-);
+// Status colors - Individual declarations
+$success-color: #27ae60;
+$warning-color: #f39c12;
+$error-color: #e74c3c;
+$info-color: #3498db;
 
-// Spacing values
-$spacing: (
-  xs: 4px,
-  sm: 8px,
-  md: 16px,
-  lg: 24px,
-  xl: 32px,
-  xxl: 64px,
-  xxxl: 80px,
-);
+// Breakpoints - Individual declarations
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-large: 1200px;
 
-// Typography scales
-$font-sizes: (
-  small: 14px,
-  base: 16px,
-  lg: 18px,
-  xl: 20px,
-  xxl: 24px,
-);
+// Spacing variables - Individual declarations
+$spacing-xxs: 2px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 64px;
+$spacing-xxxl: 80px;
 
-$line-heights: (
-  tight: 1.2,
-  base: 1.5,
-  relaxed: 1.8,
-);
+// Border radius variables - Individual declarations
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+$border-radius-xxl: 20px;
+
+// Shadow variables
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 10px 40px rgba(0, 0, 0, 0.2);
+$shadow-xxl: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+// Typography variables - Individual declarations
+$font-size-small: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-xxl: 1.5rem;
+
+$line-height-tight: 1.2;
+$line-height-base: 1.5;
+$line-height-relaxed: 1.8;
+
+// CSS Custom Properties (CSS Variables)
+:root {
+  // Theme colors
+  --primary: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --primary-rgb: 59, 130, 246;
+  --secondary: #8b5cf6;
+  --secondary-dark: #7c3aed;
+
+  // Background colors
+  --background-primary: #f8fafc;
+  --background-secondary: #ffffff;
+  --background-hover: #f1f5f9;
+  --background-secondary-rgb: 255, 255, 255;
+
+  // Text colors
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+
+  // Border colors
+  --border-color: #e2e8f0;
+
+  // Status colors
+  --success: #{$success-color};
+  --warning: #{$warning-color};
+  --warning-rgb: 243, 156, 18;
+  --error: #{$error-color};
+  --info: #{$info-color};
+
+  // Utility colors
+  --white: #ffffff;
+  --black: #000000;
+
+  // Pokemon type colors
+  --pokemon-gradient-opacity: 0.8;
+
+  // Dark mode
+  @media (prefers-color-scheme: dark) {
+    --primary: #60a5fa;
+    --primary-dark: #3b82f6;
+    --secondary: #a78bfa;
+    --secondary-dark: #8b5cf6;
+
+    --background-primary: #0f172a;
+    --background-secondary: #1e293b;
+    --background-hover: #334155;
+    --background-secondary-rgb: 30, 41, 59;
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+
+    --border-color: #334155;
+
+    --pokemon-gradient-opacity: 0.3;
+  }
+}

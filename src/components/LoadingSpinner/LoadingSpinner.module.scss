@@ -1,0 +1,49 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+
+  &.small {
+    padding: $spacing-md;
+  }
+
+  &.medium {
+    padding: $spacing-xl;
+  }
+
+  &.large {
+    padding: $spacing-xxl;
+  }
+}
+
+.spinnerContainer {
+  margin-block-end: $spacing-lg;
+}
+
+.pokeballImage {
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+  object-fit: contain;
+}
+
+.message {
+  color: var(--text-secondary);
+  font-size: $font-size-small;
+  text-align: center;
+  margin: 0;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -4,4 +4,18 @@
 
 // Base styles (reset, global variables)
 @use "base/variables";
+
+// Import Bootstrap for containers and normalization only
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/containers";
+
+// Our custom styles
+@use "abstracts/variables";
 @use "base/reset";
+@use "base/typography";
+@use "base/base";

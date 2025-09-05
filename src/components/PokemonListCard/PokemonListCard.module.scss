@@ -1,0 +1,225 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.card {
+  display: flex;
+  align-items: center;
+  background: var(--background-secondary);
+  border-radius: $border-radius-lg;
+  padding: $spacing-md $spacing-lg;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: $shadow-lg;
+    border-color: var(--primary);
+
+    .arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: translateX(2px);
+  }
+
+  &.loading {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  // Pokemon type variations
+  @each $type, $color in $pokemon-types {
+    &.#{$type} {
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 4px;
+        background: #{$color};
+      }
+
+      &:hover {
+        border-color: #{$color};
+      }
+    }
+  }
+}
+
+.imageContainer {
+  position: relative;
+  flex-shrink: 0;
+  margin-right: $spacing-lg;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    width: 60px;
+    height: 60px;
+    margin-right: $spacing-md;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+
+  .card:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.imageSkeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-rgb), 0.1),
+    transparent
+  );
+  border-radius: 50%;
+  animation: skeleton-loading 2s infinite;
+}
+
+.content {
+  flex: 1;
+  min-width: 0; // Prevent flex item from overflowing
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-block-end: $spacing-sm;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-xs;
+  }
+}
+
+.number {
+  font-size: $font-size-xxl;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: capitalize;
+  line-height: 1.2;
+  margin: 0;
+
+  @include mobile {
+    font-size: 1.1rem;
+  }
+}
+
+.types {
+  display: flex;
+  gap: $spacing-xs;
+  margin-block-end: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.type {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  // Pokemon type colors
+  @each $typeName, $color in $pokemon-types {
+    &.#{$typeName} {
+      background-color: #{$color};
+
+      &:hover {
+        background-color: #{$color};
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.stats {
+  display: flex;
+  gap: $spacing-lg;
+
+  @include mobile {
+    gap: $spacing-md;
+  }
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: 0.8rem;
+}
+
+.statIcon {
+  font-size: $font-size-xxl;
+}
+
+.statValue {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  margin-left: $spacing-md;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2;
+  }
+
+  @include mobile {
+    margin-left: $spacing-sm;
+  }
+}
+
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--background-secondary-rgb), 0.8);
+  border-radius: $border-radius-lg;
+  z-index: 10;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

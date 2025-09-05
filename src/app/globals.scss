@@ -1,7 +1,10 @@
+// Import our custom CSS variables
+@use "../styles/abstracts/variables" as *;
+
 // Global theme variables
-$background-light: #ffffff;
+$background-light: #f8fafc;
 $foreground-light: #171717;
-$background-dark: #0a0a0a;
+$background-dark: #0f172a;
 $foreground-dark: #ededed;
 
 :root {

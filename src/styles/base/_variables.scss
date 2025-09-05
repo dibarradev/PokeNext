@@ -1,14 +1,13 @@
-@use "sass:map";
 @use "../abstracts/variables" as v;
 @use "../abstracts/mixins" as m;
 
 // Global CSS Custom Properties
 :root {
-  --background: #{map.get(map.get(v.$colors, primary), light)};
-  --foreground: #{map.get(map.get(v.$colors, secondary), light)};
+  --background: #{v.$primary-light};
+  --foreground: #{v.$secondary-light};
 
   @include m.dark-mode {
-    --background: #{map.get(map.get(v.$colors, primary), dark)};
-    --foreground: #{map.get(map.get(v.$colors, secondary), dark)};
+    --background: #{v.$primary-dark};
+    --foreground: #{v.$secondary-dark};
   }
 }

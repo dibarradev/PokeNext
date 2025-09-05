@@ -1,0 +1,106 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-xl;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-md;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  font-size: $font-size-small;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--background-hover);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.prev,
+  &.next {
+    font-weight: 500;
+  }
+
+  @include mobile {
+    padding: $spacing-xs $spacing-sm;
+    font-size: 0.8rem;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.page {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  font-size: $font-size-small;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--background-hover);
+  }
+
+  &.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+
+    &:hover {
+      background: var(--primary-dark);
+    }
+  }
+
+  &.ellipsis {
+    cursor: default;
+    border-color: transparent;
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  @include mobile {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+}

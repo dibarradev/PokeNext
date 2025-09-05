@@ -1,0 +1,382 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $spacing-lg;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.modal {
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  background: var(--background-secondary);
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-xxl;
+  position: relative;
+
+  // Pokemon type variations
+  @each $type, $color in $pokemon-types {
+    &.#{$type} {
+      .header {
+        background: #{$color};
+      }
+    }
+  }
+}
+
+.header {
+  padding: $spacing-xl;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  text-transform: capitalize;
+
+  @include mobile {
+    font-size: $font-size-xxl;
+  }
+}
+
+.number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: 0.8;
+
+  @include mobile {
+    font-size: 1rem;
+  }
+}
+
+.close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--white);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+  }
+}
+
+.content {
+  padding: $spacing-xl;
+  overflow-y: auto;
+  max-height: calc(90vh - 120px);
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.hero {
+  display: flex;
+  gap: $spacing-xl;
+  margin-block-end: $spacing-xl;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-lg;
+    text-align: center;
+  }
+}
+
+.imageContainer {
+  flex-shrink: 0;
+  background: radial-gradient(
+    circle,
+    rgba(var(--primary-rgb), 0.1),
+    transparent
+  );
+  border-radius: 50%;
+  padding: $spacing-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    align-self: center;
+  }
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+
+  @include mobile {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.basicInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $spacing-lg;
+}
+
+.types {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+
+  @include mobile {
+    justify-content: center;
+  }
+}
+
+.type {
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-lg;
+  font-size: $font-size-small;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--white);
+  box-shadow: $shadow-md;
+  border: 2px solid transparent;
+
+  // Pokemon type colors - Apply to all types regardless of modal class
+  @each $type, $color in $pokemon-types {
+    &.#{$type} {
+      background: #{$color};
+      border-color: #{$color};
+    }
+  }
+}
+
+.measurements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+
+  @include mobile {
+    gap: $spacing-md;
+  }
+}
+
+.measurement {
+  text-align: center;
+  padding: $spacing-md;
+  background: var(--background-primary);
+  border-radius: $border-radius-md;
+}
+
+.measurementLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-block-end: $spacing-xs;
+  font-weight: 600;
+}
+
+.measurementValue {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-xxl;
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-block-end: $spacing-lg;
+}
+
+.error {
+  text-align: center;
+  padding: $spacing-xl;
+  color: var(--error);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  h3 {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-block-end: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid var(--border-color);
+  }
+}
+
+.description {
+  p {
+    line-height: 1.7;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+}
+
+.abilities {
+  margin-block-start: $spacing-lg;
+
+  h3 {
+    margin-block-end: $spacing-md;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+.abilitiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.ability {
+  padding: $spacing-sm $spacing-md;
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-md;
+  font-weight: 500;
+  text-transform: capitalize;
+  position: relative;
+
+  &.hidden {
+    border-color: var(--warning);
+    background: rgba(var(--warning-rgb), 0.1);
+  }
+}
+
+.abilityHiddenLabel {
+  font-size: 0.7rem;
+  color: var(--warning);
+  font-weight: 600;
+  margin-left: $spacing-xs;
+}
+
+.stats {
+  margin-block-start: $spacing-lg;
+
+  h3 {
+    margin-block-end: $spacing-md;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: 120px 1fr 60px;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm 0;
+
+  @include mobile {
+    grid-template-columns: 80px 1fr 50px;
+    gap: $spacing-sm;
+  }
+}
+
+.statName {
+  font-size: $font-size-small;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.statBar {
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.statFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.statValue {
+  font-size: $font-size-small;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

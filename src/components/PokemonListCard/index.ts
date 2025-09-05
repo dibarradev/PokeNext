@@ -1,0 +1,1 @@
+export { PokemonListCard } from './PokemonListCard';
