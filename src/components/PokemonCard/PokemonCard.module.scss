@@ -123,7 +123,7 @@
   line-height: 1.2;
 
   @include mobile {
-    font-size: 1.1rem;
+    font-size: $font-size-lg;
   }
 }
 
@@ -138,7 +138,7 @@
 .type {
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-sm;
-  font-size: 0.8rem;
+  font-size: $font-size-small;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -173,7 +173,7 @@
 
 .statLabel {
   display: block;
-  font-size: 0.7rem;
+  font-size: $font-size-small;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;

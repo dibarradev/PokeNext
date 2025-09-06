@@ -60,7 +60,7 @@
 }
 
 .name {
-  font-size: 2rem;
+  font-size: $font-size-xxxl;
   font-weight: 800;
   margin: 0;
   text-transform: capitalize;
@@ -71,12 +71,12 @@
 }
 
 .number {
-  font-size: 1.2rem;
+  font-size: $font-size-lg;
   font-weight: 600;
   opacity: 0.8;
 
   @include mobile {
-    font-size: 1rem;
+    font-size: $font-size-base;
   }
 }
 
@@ -213,7 +213,7 @@
 
 .measurementLabel {
   display: block;
-  font-size: 0.8rem;
+  font-size: $font-size-small;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -270,7 +270,7 @@
   p {
     line-height: 1.7;
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: $font-size-base;
   }
 }
 
@@ -280,7 +280,7 @@
   h3 {
     margin-block-end: $spacing-md;
     color: var(--text-primary);
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
     font-weight: 600;
   }
 }
@@ -307,7 +307,7 @@
 }
 
 .abilityHiddenLabel {
-  font-size: 0.7rem;
+  font-size: $font-size-small;
   color: var(--warning);
   font-weight: 600;
   margin-left: $spacing-xs;
@@ -319,7 +319,7 @@
   h3 {
     margin-block-end: $spacing-md;
     color: var(--text-primary);
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
     font-weight: 600;
   }
 }
