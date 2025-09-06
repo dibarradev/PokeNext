@@ -145,7 +145,7 @@ export function SearchFilters({
           {/* Results info */}
           <div className={`${styles.resultsInfo}`}>
             {filteredPokemonCount !== 151 && (
-              <p className={`mb-0 ${styles.results}`}>
+              <p className={`${styles.results}`}>
                 Showing {filteredPokemonCount} of 151 Pokémon
                 {(searchTerm || selectedTypes.length > 0) && (
                   <button
