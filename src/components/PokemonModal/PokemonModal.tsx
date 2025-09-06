@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { animations, useGSAP } from '../../hooks/useGSAP';
 import {
   Pokemon,
   PokemonAbility,
@@ -48,6 +49,30 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // GSAP animations
+  useGSAP();
+
+  // Animate modal when it opens
+  useEffect(() => {
+    if (isOpen) {
+      // Animate modal entrance
+      animations.modalBackdrop('#modal-backdrop');
+      animations.modalSlideUp('#modal-content');
+    }
+  }, [isOpen]);
+
+  // Handle animated close
+  const handleAnimatedClose = useCallback(() => {
+    // Animate exit before closing
+    animations.exit.modal('#modal-content');
+    animations.exit.backdrop('#modal-backdrop');
+
+    // Close modal after animation
+    setTimeout(() => {
+      onClose();
+    }, 250);
+  }, [onClose]);
+
   // Load complete Pokemon data when modal opens
   useEffect(() => {
     if (isOpen && pokemon) {
@@ -73,7 +98,7 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleAnimatedClose();
       }
     };
 
@@ -86,7 +111,7 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, handleAnimatedClose]);
 
   // Reset state when modal closes
   useEffect(() => {
@@ -106,8 +131,16 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
     .join(' ');
 
   return (
-    <div className={styles.backdrop} onClick={onClose}>
-      <div className={modalClasses} onClick={e => e.stopPropagation()}>
+    <div
+      id='modal-backdrop'
+      className={styles.backdrop}
+      onClick={handleAnimatedClose}
+    >
+      <div
+        id='modal-content'
+        className={modalClasses}
+        onClick={e => e.stopPropagation()}
+      >
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.title}>
@@ -118,7 +151,7 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
           </div>
           <button
             className={styles.close}
-            onClick={onClose}
+            onClick={handleAnimatedClose}
             aria-label='Close modal'
           >
             <i className='bi bi-x-lg'></i>

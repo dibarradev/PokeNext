@@ -18,6 +18,8 @@
 
 .siteLogo {
   margin-block-end: $spacing-lg;
+  opacity: 0;
+  transform: scale(0.8);
 }
 
 .title {
@@ -39,6 +41,8 @@
   font-size: $font-size-lg;
   color: var(--text-primary);
   margin-block-end: $spacing-md;
+  opacity: 0;
+  transform: translateY(15px);
 }
 
 .controls {
@@ -152,6 +156,8 @@
 
 .noFoundBlock {
   cursor: default;
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
 }
 
 .noResultsIcon {

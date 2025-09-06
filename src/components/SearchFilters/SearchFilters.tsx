@@ -44,7 +44,7 @@ export function SearchFilters({
   };
 
   return (
-    <div>
+    <div id='searchFilters'>
       <div className='container p-0'>
         {/* Combo search input + toggle container */}
         <div className={styles.searchInputToggleContainer}>

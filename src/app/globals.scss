@@ -49,3 +49,28 @@ a {
     color-scheme: dark;
   }
 }
+
+// GSAP Animation initial states
+.pokemon-card-wrapper {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+#searchFilters {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+#modal-backdrop {
+  opacity: 0;
+}
+
+#modal-content {
+  opacity: 0;
+  transform: translateY(50%) scale(0.95);
+}
+
+#no-found-block {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
