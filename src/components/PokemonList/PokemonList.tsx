@@ -190,9 +190,16 @@ export function PokemonList() {
   );
 
   const eyeCatchTextFragment = (
-    <p id='eyecatch-text' className={`fs-5 ${styles.eyecatchText}`}>
-      Discover and explore the first 151 Pokémon
-    </p>
+    <span>Discover and explore the first 151 Pokémon</span>
+  );
+
+  const titleFragment = (
+    <h1
+      id='eyecatch-text'
+      className={`fs-5 ${styles.eyecatchText} ${styles.title}`}
+    >
+      {eyeCatchTextFragment}
+    </h1>
   );
 
   // Loading state
@@ -201,7 +208,7 @@ export function PokemonList() {
       <div className={styles.container}>
         <div className='text-center mb-5'>
           {siteLogo}
-          <h1 className={styles.title}>{eyeCatchTextFragment}</h1>
+          {titleFragment}
         </div>
         <LoadingSpinner />
       </div>
@@ -214,7 +221,7 @@ export function PokemonList() {
       <div className={styles.container}>
         <div className='text-center mb-5'>
           {siteLogo}
-          <h1 className={styles.title}>{eyeCatchTextFragment}</h1>
+          {titleFragment}
         </div>
         <ErrorMessage error={error} onRetry={refetch} />
       </div>
@@ -226,7 +233,7 @@ export function PokemonList() {
       {/* Header */}
       <div className='text-center mb-5'>
         {siteLogo}
-        <h1 className={styles.title}>{eyeCatchTextFragment}</h1>
+        {titleFragment}
       </div>
 
       {/* Controls */}

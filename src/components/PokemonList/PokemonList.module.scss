@@ -40,9 +40,10 @@
 .eyecatchText {
   font-size: $font-size-lg;
   color: var(--text-primary);
-  margin-block-end: $spacing-md;
+  margin-bottom: $spacing-md;
   opacity: 0;
-  transform: translateY(15px);
+  position: relative;
+  top: 15px;
 }
 
 .controls {

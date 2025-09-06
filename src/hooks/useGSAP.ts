@@ -66,17 +66,17 @@ export const animations = {
     );
   },
 
-  // Fade up animation - optimized
+  // Fade up animation
   fadeUp: (element: string | Element, delay: number = 0) => {
     return gsap.fromTo(
       element,
       {
         opacity: 0,
-        y: 15,
+        top: 15,
       },
       {
         opacity: 1,
-        y: 0,
+        top: 0,
         duration: 0.4,
         ease: 'power2.out',
         delay,
