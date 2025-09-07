@@ -13,6 +13,7 @@ import {
 } from '../../types/pokemon';
 import {
   fetchCompletePokemonData,
+  fetchPokemonSpecies,
   formatHeight,
   formatPokemonId,
   formatPokemonName,
@@ -80,8 +81,52 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
         try {
           setLoading(true);
           setError(null);
-          const data = await fetchCompletePokemonData(pokemon.id);
-          setCompleteData(data);
+
+          // Check if we already have all the data we need
+          if (
+            pokemon.types &&
+            pokemon.height &&
+            pokemon.weight &&
+            pokemon.abilities &&
+            pokemon.stats
+          ) {
+            // We have the main data, only fetch species if needed for description
+            if (!pokemon.species || !pokemon.species.flavor_text_entries) {
+              const species = await fetchPokemonSpecies(pokemon.id);
+              setCompleteData({
+                detail: {
+                  id: pokemon.id,
+                  name: pokemon.name,
+                  height: pokemon.height,
+                  weight: pokemon.weight,
+                  sprites: { front_default: pokemon.sprite } as PokemonSprites,
+                  types: pokemon.types,
+                  abilities: pokemon.abilities,
+                  stats: pokemon.stats,
+                },
+                species,
+              });
+            } else {
+              // We have everything, use existing data
+              setCompleteData({
+                detail: {
+                  id: pokemon.id,
+                  name: pokemon.name,
+                  height: pokemon.height,
+                  weight: pokemon.weight,
+                  sprites: { front_default: pokemon.sprite } as PokemonSprites,
+                  types: pokemon.types,
+                  abilities: pokemon.abilities,
+                  stats: pokemon.stats,
+                },
+                species: pokemon.species,
+              });
+            }
+          } else {
+            // Fallback: fetch complete data if Pokemon is missing details
+            const data = await fetchCompletePokemonData(pokemon.id);
+            setCompleteData(data);
+          }
         } catch (err) {
           setError('Failed to load Pokemon details');
           console.error('Error loading Pokemon data:', err);

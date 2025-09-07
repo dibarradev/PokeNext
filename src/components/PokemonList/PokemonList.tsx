@@ -16,8 +16,8 @@ import styles from './PokemonList.module.scss';
 
 export function PokemonList() {
   const {
-    currentPagePokemon,
     filteredPokemon,
+    currentPagePokemon,
     loading,
     error,
     currentPage,

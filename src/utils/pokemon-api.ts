@@ -73,16 +73,36 @@ export async function fetchPokemonList(): Promise<Pokemon[]> {
 export async function fetchPokemonDetail(
   pokemonId: number
 ): Promise<PokemonDetail> {
+  const cacheKey = `pokemon-detail-${pokemonId}`;
+  const cached = pokemonCache.get<PokemonDetail>(cacheKey);
+
+  if (cached) {
+    return cached;
+  }
+
   const url = `${API_BASE_URL}/pokemon/${pokemonId}`;
-  return await apiRequest<PokemonDetail>(url);
+  const detail = await apiRequest<PokemonDetail>(url);
+
+  pokemonCache.set(cacheKey, detail);
+  return detail;
 }
 
 // Get Pokemon species data (for description and flavor text)
 export async function fetchPokemonSpecies(
   pokemonId: number
 ): Promise<PokemonSpecies> {
+  const cacheKey = `pokemon-species-${pokemonId}`;
+  const cached = pokemonCache.get<PokemonSpecies>(cacheKey);
+
+  if (cached) {
+    return cached;
+  }
+
   const url = `${API_BASE_URL}/pokemon-species/${pokemonId}`;
-  return await apiRequest<PokemonSpecies>(url);
+  const species = await apiRequest<PokemonSpecies>(url);
+
+  pokemonCache.set(cacheKey, species);
+  return species;
 }
 
 // Get Pokemon by name or ID

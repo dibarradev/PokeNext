@@ -1,6 +1,3 @@
-// React hook for managing Pokemon data and state
-'use client';
-
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApiError, Pokemon } from '../types/pokemon';
 import {
@@ -45,11 +42,16 @@ interface UsePokemonReturn {
 }
 
 export function usePokemon(): UsePokemonReturn {
+  // Data state
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ApiError | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
+
+  // UI state
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Filter state
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'id' | 'name' | 'height' | 'weight'>(
@@ -57,30 +59,30 @@ export function usePokemon(): UsePokemonReturn {
   );
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // Load initial Pokemon list
+  // Load initial Pokemon list with complete data (first 151)
   const loadPokemon = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
       // Check cache first
-      const cachedList = pokemonCache.get<Pokemon[]>('pokemon-list');
+      const cachedList = pokemonCache.get<Pokemon[]>('pokemon-list-complete');
       if (cachedList) {
         setPokemon(cachedList);
         setLoading(false);
         return;
       }
 
-      // Fetch basic list
+      // Fetch basic list (first 151)
       const basicList = await fetchPokemonList();
 
-      // Load detailed data for first batch (for immediate display)
-      const firstBatch = basicList.slice(0, ITEMS_PER_PAGE);
-      const firstBatchIds = firstBatch.map(p => p.id);
-      const detailedPokemon = await fetchMultiplePokemon(firstBatchIds);
+      // Fetch detailed data for all 151 Pokemon
+      const detailedPokemon = await fetchMultiplePokemon(
+        basicList.map(p => p.id)
+      );
 
-      // Merge detailed data with basic list
-      const enhancedList = basicList.map(basic => {
+      // Combine basic info with detailed data
+      const completeList = basicList.map(basic => {
         const detailed = detailedPokemon.find(d => d.id === basic.id);
         if (detailed) {
           return {
@@ -96,95 +98,19 @@ export function usePokemon(): UsePokemonReturn {
         return basic;
       });
 
-      setPokemon(enhancedList);
-      pokemonCache.set('pokemon-list', enhancedList);
+      // Cache the complete list
+      pokemonCache.set('pokemon-list-complete', completeList);
+      setPokemon(completeList);
     } catch (err) {
       const apiError = handleApiError(err);
       setError(apiError);
+      console.error('Failed to load Pokemon:', err);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  // Load more detailed data as needed (lazy loading)
-  const loadPokemonBatch = useCallback(
-    async (startIndex: number, endIndex: number) => {
-      const pokemonToLoad = pokemon.slice(startIndex, endIndex);
-      const pokemonNeedingDetails = pokemonToLoad.filter(p => !p.sprite);
-
-      if (pokemonNeedingDetails.length === 0) return;
-
-      try {
-        const ids = pokemonNeedingDetails.map(p => p.id);
-        const detailedPokemon = await fetchMultiplePokemon(ids);
-
-        setPokemon(prev =>
-          prev.map(p => {
-            const detailed = detailedPokemon.find(d => d.id === p.id);
-            if (detailed) {
-              return {
-                ...p,
-                sprite: detailed.sprites.front_default || undefined,
-                types: detailed.types,
-                height: detailed.height,
-                weight: detailed.weight,
-                abilities: detailed.abilities,
-                stats: detailed.stats,
-              };
-            }
-            return p;
-          })
-        );
-      } catch (err) {
-        console.error('Failed to load Pokemon batch:', err);
-      }
-    },
-    [pokemon]
-  );
-
-  // Load all Pokemon details when type filter is applied
-  const loadAllPokemonDetails = useCallback(async () => {
-    const pokemonNeedingDetails = pokemon.filter(p => !p.types);
-
-    if (pokemonNeedingDetails.length === 0) return;
-
-    try {
-      // Load in smaller batches to avoid overwhelming the API
-      const batchSize = 50;
-      const batches = [];
-
-      for (let i = 0; i < pokemonNeedingDetails.length; i += batchSize) {
-        batches.push(pokemonNeedingDetails.slice(i, i + batchSize));
-      }
-
-      for (const batch of batches) {
-        const ids = batch.map(p => p.id);
-        const detailedPokemon = await fetchMultiplePokemon(ids);
-
-        setPokemon(prev =>
-          prev.map(p => {
-            const detailed = detailedPokemon.find(d => d.id === p.id);
-            if (detailed && !p.types) {
-              return {
-                ...p,
-                sprite: detailed.sprites.front_default || undefined,
-                types: detailed.types,
-                height: detailed.height,
-                weight: detailed.weight,
-                abilities: detailed.abilities,
-                stats: detailed.stats,
-              };
-            }
-            return p;
-          })
-        );
-      }
-    } catch (err) {
-      console.error('Failed to load all Pokemon details:', err);
-    }
-  }, [pokemon]);
-
-  // Filter and sort Pokemon
+  // Filter and sort Pokemon (all Pokemon already have complete data)
   const filteredPokemon = useMemo(() => {
     let filtered = [...pokemon];
 
@@ -232,26 +158,12 @@ export function usePokemon(): UsePokemonReturn {
   // Calculate pagination
   const totalPages = Math.ceil(filteredPokemon.length / ITEMS_PER_PAGE);
 
+  // Calculate pagination
   const currentPagePokemon = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
-    const pageData = filteredPokemon.slice(startIndex, endIndex);
-
-    // Lazy load details for current page
-    if (pageData.length > 0) {
-      const originalStartIndex = pokemon.findIndex(
-        p => p.id === pageData[0].id
-      );
-      const originalEndIndex =
-        pokemon.findIndex(p => p.id === pageData[pageData.length - 1].id) + 1;
-
-      if (originalStartIndex !== -1 && originalEndIndex !== -1) {
-        loadPokemonBatch(originalStartIndex, originalEndIndex);
-      }
-    }
-
-    return pageData;
-  }, [filteredPokemon, currentPage, pokemon, loadPokemonBatch]);
+    return filteredPokemon.slice(startIndex, endIndex);
+  }, [filteredPokemon, currentPage]);
 
   // Clear all filters
   const clearFilters = useCallback(() => {
@@ -272,13 +184,6 @@ export function usePokemon(): UsePokemonReturn {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, selectedTypes, sortBy, sortOrder]);
-
-  // Load all Pokemon details when type filter is applied
-  useEffect(() => {
-    if (selectedTypes.length > 0) {
-      loadAllPokemonDetails();
-    }
-  }, [selectedTypes, loadAllPokemonDetails]);
 
   // Load data on mount
   useEffect(() => {
