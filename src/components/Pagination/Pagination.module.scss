@@ -28,9 +28,25 @@
     transform: translateY(-1px);
   }
 
+  &:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+
+    &:focus {
+      outline: 2px solid var(--border-color);
+      outline-offset: 2px;
+    }
   }
 
   &.prev,
@@ -76,6 +92,18 @@
 
   &:hover:not(:disabled) {
     background: var(--background-hover);
+    transform: translateY(-1px);
+  }
+
+  &:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
   }
 
   &.active {
@@ -86,15 +114,27 @@
     &:hover {
       background: var(--primary-dark);
     }
+
+    &:focus {
+      outline: 2px solid var(--white);
+      outline-offset: 2px;
+    }
   }
 
   &.ellipsis {
     cursor: default;
     border-color: transparent;
     background: transparent;
+    pointer-events: none;
 
     &:hover {
       background: transparent;
+      transform: none;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
   }
 

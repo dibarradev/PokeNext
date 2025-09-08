@@ -50,17 +50,23 @@ export function Pagination({
   };
 
   return (
-    <div className={styles.pagination}>
+    <nav
+      className={styles.pagination}
+      role='navigation'
+      aria-label='Pokemon list pagination'
+    >
       <button
         className={`${styles.button} ${styles.prev}`}
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
+        aria-label={`Go to previous page, page ${currentPage - 1}`}
+        type='button'
       >
-        <i className='bi bi-chevron-left'></i>
+        <i className='bi bi-chevron-left' aria-hidden='true'></i>
         <span>Previous</span>
       </button>
 
-      <div className={styles.pages}>
+      <div className={styles.pages} role='group' aria-label='Pagination pages'>
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
@@ -69,6 +75,15 @@ export function Pagination({
             } ${typeof page === 'string' ? styles.ellipsis : ''}`}
             disabled={typeof page === 'string'}
             onClick={() => typeof page === 'number' && onPageChange(page)}
+            aria-label={
+              typeof page === 'string'
+                ? 'More pages'
+                : page === currentPage
+                  ? `Current page, page ${page}`
+                  : `Go to page ${page}`
+            }
+            aria-current={page === currentPage ? 'page' : undefined}
+            type='button'
           >
             {page}
           </button>
@@ -79,10 +94,12 @@ export function Pagination({
         className={`${styles.button} ${styles.next}`}
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
+        aria-label={`Go to next page, page ${currentPage + 1}`}
+        type='button'
       >
         <span>Next</span>
-        <i className='bi bi-chevron-right'></i>
+        <i className='bi bi-chevron-right' aria-hidden='true'></i>
       </button>
-    </div>
+    </nav>
   );
 }
