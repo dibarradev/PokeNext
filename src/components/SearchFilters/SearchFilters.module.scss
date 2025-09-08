@@ -226,7 +226,12 @@
   @each $type, $color in $pokemon-types {
     &.#{$type} {
       background-color: #{$color};
-      color: var(--white);
+
+      @if $type == "electric" or $type == "normal" or $type == "ground" {
+        color: var(--black);
+      } @else {
+        color: var(--white);
+      }
 
       &:hover {
         background-color: #{$color};
