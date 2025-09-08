@@ -1,0 +1,27 @@
+{
+  "name": "PokeNext - Pokemon Explorer",
+  "short_name": "PokeNext",
+  "description": "Explore the original 151 Kanto Pokemon with complete data, advanced search, and filtering",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/img/pokenext_logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/pokenext_logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment", "games", "education"],
+  "lang": "en",
+  "dir": "ltr"
+}

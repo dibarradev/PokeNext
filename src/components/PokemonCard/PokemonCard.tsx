@@ -30,7 +30,19 @@ export function PokemonCard({
     .join(' ');
 
   return (
-    <div className={cardClasses} onClick={onClick}>
+    <div
+      className={cardClasses}
+      onClick={onClick}
+      role='button'
+      tabIndex={0}
+      aria-label={`View details for ${formatPokemonName(pokemon.name)}, Pokemon #${pokemon.id}${pokemon.types ? `, ${pokemon.types.map(t => t.type.name).join(' and ')} type` : ''}`}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       {/* Pokemon Image */}
       <div className={styles.imageContainer}>
         <Image

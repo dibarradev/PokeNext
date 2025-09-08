@@ -180,6 +180,10 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
       id='modal-backdrop'
       className={styles.backdrop}
       onClick={handleAnimatedClose}
+      role='dialog'
+      aria-modal='true'
+      aria-labelledby='modal-title'
+      aria-describedby='modal-description'
     >
       <div
         id='modal-content'
@@ -189,7 +193,9 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.title}>
-            <h2 className={styles.name}>{formatPokemonName(pokemon.name)}</h2>
+            <h2 id='modal-title' className={styles.name}>
+              {formatPokemonName(pokemon.name)}
+            </h2>
             <span className={styles.number}>
               #{formatPokemonId(pokemon.id)}
             </span>
@@ -197,7 +203,8 @@ export function PokemonModal({ pokemon, isOpen, onClose }: PokemonModalProps) {
           <button
             className={styles.close}
             onClick={handleAnimatedClose}
-            aria-label='Close modal'
+            aria-label={`Close ${formatPokemonName(pokemon.name)} details modal`}
+            title='Close modal'
           >
             <i className='bi bi-x-lg'></i>
           </button>

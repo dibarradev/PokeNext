@@ -51,14 +51,19 @@ export function SearchFilters({
           {/* Search Input */}
           <div className={styles.search}>
             <div className={styles.searchInput}>
+              <label htmlFor='pokemon-search' className='visually-hidden'>
+                Search Pokemon by name or number
+              </label>
               <input
+                id='pokemon-search'
                 type='text'
                 placeholder='Search Pokémon by name or number...'
                 value={searchTerm}
                 onChange={e => onSearchChange(e.target.value)}
                 className={styles.input}
+                aria-label='Search Pokemon by name or number'
               />
-              <div className={styles.searchIcon}>
+              <div className={styles.searchIcon} aria-hidden='true'>
                 <i className='bi bi-search'></i>
               </div>
             </div>
@@ -104,8 +109,11 @@ export function SearchFilters({
           {/* Sort Controls */}
           <div className={styles.sort}>
             <div className={styles.sortGroup}>
-              <label className={styles.label}>Sort by:</label>
+              <label htmlFor='sort-select' className={styles.label}>
+                Sort by:
+              </label>
               <select
+                id='sort-select'
                 value={sortBy}
                 onChange={e =>
                   onSortByChange(
@@ -113,6 +121,7 @@ export function SearchFilters({
                   )
                 }
                 className={styles.select}
+                aria-label='Sort Pokemon by'
               >
                 <option value='id'>Number</option>
                 <option value='name'>Name</option>
@@ -134,9 +143,11 @@ export function SearchFilters({
                   onSortOrderChange(sortOrder === 'asc' ? 'desc' : 'asc')
                 }
                 title={`Sort ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
+                aria-label={`Change sort order to ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
               >
                 <i
                   className={`bi ${sortOrder === 'asc' ? 'bi-arrow-up-circle-fill' : 'bi-arrow-down-circle-fill'}`}
+                  aria-hidden='true'
                 ></i>
               </button>
             </div>

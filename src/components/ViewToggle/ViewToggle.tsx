@@ -7,15 +7,17 @@ interface ViewToggleProps {
 
 export function ViewToggle({ viewMode, onViewModeChange }: ViewToggleProps) {
   return (
-    <div className={styles.toggle}>
+    <div className={styles.toggle} role='group' aria-label='View mode options'>
       <button
         className={`${styles.button} ${
           viewMode === 'grid' ? styles.active : ''
         }`}
         onClick={() => onViewModeChange('grid')}
         title='Grid view'
+        aria-label='Switch to grid view'
+        aria-pressed={viewMode === 'grid'}
       >
-        <i className='bi bi-grid-3x3-gap'></i>
+        <i className='bi bi-grid-3x3-gap' aria-hidden='true'></i>
       </button>
 
       <button
@@ -24,8 +26,10 @@ export function ViewToggle({ viewMode, onViewModeChange }: ViewToggleProps) {
         }`}
         onClick={() => onViewModeChange('list')}
         title='List view'
+        aria-label='Switch to list view'
+        aria-pressed={viewMode === 'list'}
       >
-        <i className='bi bi-list-ul'></i>
+        <i className='bi bi-list-ul' aria-hidden='true'></i>
       </button>
     </div>
   );
