@@ -1,82 +1,103 @@
 # PokeNext
 
-A modern Pokemon application built with Next.js 15, featuring the original 151 Kanto Pokemon with complete data integration, advanced animations, and responsive design.
+A modern Pokemon application built with Next.js 15, featuring the original 151 Kanto Pokemon with complete data integration, advanced animations, responsive design, and comprehensive SEO optimization.
 
 ## Features
 
 - **Complete Pokemon Data**: All 151 original Pokemon with types, heights, weights, abilities, and stats
-- **Advanced Search & Filtering**: Search by name/ID, filter by types, sort by various criteria
-- **Smooth Animations**: GSAP-powered animations with WebKit compatibility
-- **Responsive Design**: Grid/List view modes with mobile-first approach
-- **Modal Details**: Detailed Pokemon information with species descriptions
-- **Performance Optimized**: Intelligent caching system and batch API loading
+- **Advanced Search & Filtering**: Search by name/ID, filter by types, sort by various criteria with accessibility support
+- **Smooth Animations**: GSAP-powered animations with WebKit compatibility and performance optimization
+- **Responsive Design**: Grid/List view modes with mobile-first approach and subtle pattern overlay
+- **Modal Details**: Detailed Pokemon information with species descriptions and optimized API calls
+- **Performance Optimized**: Intelligent caching system, batch API loading, and LCP optimization
+- **SEO & Accessibility**: Complete WCAG 2.1 AA compliance, structured data, and Open Graph meta tags
+- **PWA Ready**: Progressive Web App configuration for mobile installation
 - **TypeScript**: Full type safety throughout the application
 
 ## Tech Stack
 
-- **Framework**: Next.js 15.5.2 with Turbopack
-- **Runtime**: React 19.1.0
-- **Language**: TypeScript
-- **Styling**: SCSS with Bootstrap 5.3.8
+- **Framework**: Next.js 15.5.2 with App Router and Turbopack
+- **Runtime**: React 19.1.0 with Server and Client Components
+- **Language**: TypeScript with strict type checking
+- **Styling**: SCSS with Bootstrap 5.3.8 and custom design system
 - **Icons**: Bootstrap Icons 1.13.1
-- **Animations**: GSAP 3.13.0
-- **API**: PokéAPI integration
-- **Build Tool**: Turbopack for fast development
+- **Animations**: GSAP 3.13.0 with optimized performance
+- **API**: PokéAPI v2 integration with intelligent caching
+- **SEO**: JSON-LD structured data and comprehensive meta tags
+- **Accessibility**: ARIA labels, semantic HTML, and keyboard navigation
 
 ## Project Structure
 
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── layout.tsx         # Root layout component
-│   ├── page.tsx           # Home page
-│   └── globals.css        # Global styles
-├── components/            # React components
-│   ├── LoadingSpinner/    # Loading spinner component
-│   ├── PokemonCard/       # Pokemon card display
-│   ├── PokemonList/       # Main Pokemon list with grid/list views
-│   ├── PokemonModal/      # Detailed Pokemon modal
-│   ├── SearchFilters/     # Search and filter controls
-│   └── ViewToggle/        # Grid/List view toggle
+│   ├── layout.tsx         # Root layout with meta tags and SEO
+│   ├── page.tsx           # Home page component
+│   ├── globals.scss       # Global SCSS with pattern overlay
+│   └── manifest.json      # PWA configuration
+├── components/            # React components with accessibility
+│   ├── Footer/            # Footer with disclaimer and Easter egg
+│   ├── LoadingSpinner/    # Accessible loading indicators
+│   ├── PokemonCard/       # Pokemon cards with ARIA labels
+│   ├── PokemonList/       # Main list with semantic structure
+│   ├── PokemonModal/      # Modal with focus management
+│   ├── Pagination/        # Accessible pagination with ARIA
+│   ├── SearchFilters/     # Filters with fieldsets and live regions
+│   └── ViewToggle/        # Toggle with pressed states
 ├── hooks/                 # Custom React hooks
-│   └── usePokemon.ts      # Main Pokemon data management hook
-├── styles/                # SCSS styling
+│   └── usePokemon.ts      # Pokemon data management with 151 limit
+├── lib/                   # Library functions
+│   ├── env.ts             # Environment configuration
+│   ├── jsonld.ts          # JSON-LD structured data generation
+│   └── metadata.ts        # Meta tags and Open Graph configuration
+├── styles/                # SCSS architecture
 │   ├── abstracts/         # Variables, mixins, functions
-│   ├── base/              # Base styles and resets
+│   ├── base/              # Base styles and accessibility utilities
 │   ├── components/        # Component-specific styles
-│   └── globals.scss       # Global SCSS imports
-├── types/                 # TypeScript type definitions
-│   └── pokemon.ts         # Pokemon-related types
+│   └── globals.scss       # Global imports and pattern overlay
+├── types/                 # TypeScript definitions
+│   └── pokemon.ts         # Pokemon and API response types
 └── utils/                 # Utility functions
-    └── pokemon-api.ts     # API integration and caching
+    └── pokemon-api.ts     # API calls with caching and error handling
 ```
 
 ## Architecture Overview
 
 ### Data Management
 
-- **usePokemon Hook**: Centralized state management for Pokemon data, filtering, sorting, and pagination
-- **Caching System**: Intelligent caching with `pokemonCache` to minimize API calls
-- **Batch Loading**: Optimized API calls using `fetchMultiplePokemon` for efficient data loading
+- **usePokemon Hook**: Centralized state for all 151 Pokemon with complete data loading at startup
+- **Smart Caching**: Three-tier cache system (list, details, species) with session persistence
+- **Optimized Loading**: Single batch load of all 151 Pokemon eliminates lazy loading complexity
+- **Error Handling**: Robust error boundaries with graceful fallbacks
 
 ### API Integration
 
-- **PokéAPI**: Complete integration with https://pokeapi.co/api/v2/
-- **Error Handling**: Robust error handling with custom `ApiError` types
-- **Cache Strategy**: Memory-based caching for Pokemon details and species data
+- **PokéAPI v2**: Complete integration focused on original 151 Kanto Pokemon
+- **Efficient Batching**: `fetchMultiplePokemon` loads all Pokemon data in optimized batches
+- **Reduced API Calls**: Modal optimizations prevent duplicate requests
+- **Cache Strategy**: Memory-based caching with environment-specific configurations
+
+### SEO & Performance
+
+- **Structured Data**: JSON-LD schema for Pokemon and website information
+- **Meta Tags**: Complete Open Graph, Twitter Cards, and PWA meta tags
+- **LCP Optimization**: Critical image preloading and font-display optimization
+- **Accessibility**: WCAG 2.1 AA compliance with comprehensive ARIA implementation
 
 ### Animation System
 
-- **GSAP Integration**: Custom `useGSAP` hook for animation management
-- **WebKit Compatibility**: Special handling for Safari/mobile browsers
-- **Animation Types**: Site logo scaling, fade-up effects, grid cascading, modal animations
+- **GSAP Integration**: Custom `useGSAP` hook with WebKit compatibility fixes
+- **Performance Focus**: Transform optimizations avoid problematic properties on mobile
+- **Smooth Interactions**: Rotation-based animations for better cross-browser support
+- **Accessible Animations**: Respect for reduced motion preferences
 
-### Performance Optimizations
+### Accessibility Features
 
-- **Complete Data Loading**: All 151 Pokemon loaded with full details at startup
-- **Memoization**: React.useMemo and React.useCallback for optimal re-renders
-- **Lazy Loading**: Images optimized with Next.js Image component
-- **TypeScript**: Full type safety preventing runtime errors
+- **Semantic HTML**: Proper landmarks, headings, and structure
+- **ARIA Implementation**: Complete labeling, states, and live regions
+- **Keyboard Navigation**: Full keyboard accessibility with visible focus indicators
+- **Screen Reader Support**: Descriptive labels and context information
+- **Color Contrast**: Optimized contrast ratios for all interactive elements
 
 ## Getting Started
 
@@ -104,7 +125,14 @@ yarn install
 pnpm install
 ```
 
-3. Start the development server:
+3. Configure environment variables:
+
+```bash
+cp .env.example .env.local
+# Edit .env.local with your configuration
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
@@ -114,12 +142,26 @@ yarn dev
 pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Environment Configuration
+
+Create a `.env.local` file:
+
+```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+For production deployment:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://poke-next-generation.vercel.app
+```
 
 ### Development Scripts
 
 - `npm run dev` - Start development server with Turbopack
-- `npm run build` - Create production build
+- `npm run build` - Create optimized production build
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint with auto-fix
 - `npm run lint:check` - Check linting without fixes
@@ -131,47 +173,79 @@ pnpm dev
 
 ### Basic Navigation
 
-- Browse through the original 151 Pokemon in grid or list view
-- Use pagination to navigate through Pokemon pages (20 per page)
-- Click on any Pokemon card to view detailed information
+- Browse all 151 original Kanto Pokemon in grid or list view
+- Use accessible pagination to navigate through Pokemon (10 per page)
+- Click or use keyboard to access detailed Pokemon information
+- Enjoy subtle pattern overlay and smooth GSAP animations
 
-### Search & Filtering
+### Advanced Search & Filtering
 
-- **Search**: Type Pokemon name or ID number in the search bar
-- **Type Filtering**: Select one or multiple Pokemon types to filter results
-- **Sorting**: Sort by ID, name, height, or weight in ascending/descending order
-- **Clear Filters**: Reset all filters to default state
+- **Search**: Type Pokemon name or ID with autocomplete support
+- **Type Filtering**: Multi-select Pokemon types with visual feedback
+- **Smart Sorting**: Sort by ID, name, height, or weight with complete data
+- **Live Results**: Screen reader announcements for filter changes
+- **Reset Options**: Clear individual or all filters
 
-### View Modes
+### Accessibility Features
 
-- **Grid View**: Card-based layout with Pokemon images and basic info
-- **List View**: Compact list layout for faster browsing
+- **Keyboard Navigation**: Tab through all interactive elements
+- **Screen Readers**: Complete ARIA labeling and live regions
+- **Focus Management**: Visible focus indicators and logical tab order
+- **Reduced Motion**: Respects user preferences for animations
 
-### Pokemon Details Modal
+### Pokemon Details
 
-- Click any Pokemon to open detailed modal with:
-  - Complete Pokemon information
-  - Type effectiveness
-  - Physical characteristics (height/weight)
-  - Abilities and base stats
-  - Pokemon species description
+- **Rich Information**: Complete stats, abilities, and descriptions
+- **Optimized Loading**: No duplicate API calls for cached data
+- **Keyboard Accessible**: Full modal navigation support
+- **Mobile Optimized**: Touch-friendly interface
+
+## SEO & Performance
+
+### Search Engine Optimization
+
+- **Structured Data**: JSON-LD schema for rich search results
+- **Meta Tags**: Complete Open Graph and Twitter Card integration
+- **Semantic HTML**: Proper heading hierarchy and landmarks
+- **Fast Loading**: Optimized images and critical resource preloading
+
+### Performance Optimizations
+
+- **Font Display**: Swap strategy prevents text blocking
+- **Image Optimization**: Next.js Image with priority loading
+- **Bundle Optimization**: Tree shaking and code splitting
+- **Caching Strategy**: Intelligent API response caching
+
+### Progressive Web App
+
+- **Installable**: Add to home screen on mobile devices
+- **App-like Experience**: Fullscreen mode without browser chrome
+- **Optimized Icons**: Multiple sizes for different devices
+- **Offline Ready**: Service worker implementation ready
 
 ## API Integration
 
-The application integrates with PokéAPI v2:
+The application integrates with PokéAPI v2 focusing on the original 151 Pokemon:
 
 - **Base URL**: https://pokeapi.co/api/v2/
-- **Endpoints Used**:
-  - `/pokemon?limit=151` - Get list of first 151 Pokemon
-  - `/pokemon/{id}` - Get detailed Pokemon data
-  - `/pokemon-species/{id}` - Get Pokemon species information
+- **Primary Endpoints**:
+  - `/pokemon?limit=151` - Complete Kanto Pokemon list
+  - `/pokemon/{id}` - Detailed Pokemon information
+  - `/pokemon-species/{id}` - Species descriptions and lore
 
-### Caching Strategy
+### Caching Architecture
 
-- Pokemon list cached as 'pokemon-list-complete'
-- Individual Pokemon details cached as 'pokemon-detail-{id}'
-- Species data cached as 'pokemon-species-{id}'
-- Cache persists during session for optimal performance
+- **Complete List Cache**: `pokemon-list-complete` for all 151 Pokemon
+- **Individual Caches**: `pokemon-detail-{id}` and `pokemon-species-{id}`
+- **Session Persistence**: Cache survives page reloads
+- **Smart Invalidation**: Automatic cache management
+
+### Error Handling
+
+- **Graceful Degradation**: App continues functioning with partial data
+- **User Feedback**: Clear error messages for failed operations
+- **Retry Logic**: Automatic retry for transient failures
+- **Type Safety**: TypeScript prevents runtime errors
 
 ## Contributing
 
@@ -183,10 +257,25 @@ The application integrates with PokéAPI v2:
 
 ### Code Standards
 
-- Follow TypeScript best practices
-- Use ESLint and Prettier for code formatting
-- Write meaningful commit messages
-- Ensure all types are properly defined
+- **TypeScript**: Strict mode with comprehensive type definitions
+- **Accessibility**: WCAG 2.1 AA compliance required
+- **Performance**: High standards for Core Web Vitals
+- **Testing**: Component and integration tests for new features
+- **Documentation**: Update README for significant changes
+
+### Development Guidelines
+
+- Follow semantic commit message conventions
+- Ensure all ARIA labels are descriptive and contextual
+- Test keyboard navigation thoroughly
+- Validate with screen readers when possible
+- Maintain responsive design across all viewports
+
+## Legal Disclaimer
+
+This project is created for educational and portfolio demonstration purposes only. Pokemon, Nintendo, Game Freak, and The Pokemon Company are registered trademarks of their respective owners. This project is not affiliated with, endorsed by, or sponsored by Nintendo or any of its affiliates.
+
+All Pokemon data is sourced from the public [PokéAPI](https://pokeapi.co/) service, which provides free access to Pokemon information. Please review PokéAPI's terms of use for more information.
 
 ## License
 
@@ -194,7 +283,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- [PokéAPI](https://pokeapi.co/) for providing comprehensive Pokemon data
-- [Next.js](https://nextjs.org/) for the powerful React framework
-- [GSAP](https://greensock.com/gsap/) for smooth animations
+- [PokéAPI](https://pokeapi.co/) for comprehensive Pokemon data access
+- [Next.js](https://nextjs.org/) for the powerful React framework with App Router
+- [GSAP](https://greensock.com/gsap/) for smooth, performant animations
 - [Bootstrap](https://getbootstrap.com/) for responsive design utilities
+- [Vercel](https://vercel.com/) for seamless deployment and hosting
+- The Pokemon community for inspiration and feedback
+
+## Deployment
+
+The application is optimized for deployment on Vercel with automatic environment detection:
+
+- **Production URL**: https://poke-next-generation.vercel.app
+- **Automatic Builds**: Connected to GitHub for CI/CD
+- **Environment Variables**: Configure `NEXT_PUBLIC_SITE_URL` for your domain
+- **Performance**: Optimized for Core Web Vitals and SEO
