@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { Footer } from '../components/Footer';
 import { validateEnv } from '../lib/env';
 import { generateWebsiteJsonLd } from '../lib/jsonld';
 import { generateMetadata } from '../lib/metadata';
@@ -42,6 +43,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <Footer />
       </body>
     </html>
   );

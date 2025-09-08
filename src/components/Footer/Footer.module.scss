@@ -1,0 +1,80 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.footer {
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: $spacing-lg 0;
+  text-align: center;
+  font-size: $font-size-small;
+  color: var(--text-secondary);
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.techStack {
+  margin: 0;
+  font-weight: 500;
+}
+
+.disclaimer {
+  opacity: 0.8;
+  font-size: $font-size-small;
+  line-height: 1.4;
+  max-width: 800px;
+
+  p {
+    margin: 0;
+  }
+
+  strong {
+    color: var(--text-primary);
+  }
+}
+
+.pokeballContainer {
+  display: inline-block;
+}
+
+.pokeball {
+  opacity: 0.6;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  border-radius: 50%;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus {
+    opacity: 1;
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+}
