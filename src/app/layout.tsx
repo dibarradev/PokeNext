@@ -14,11 +14,13 @@ validateEnv();
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = generateMetadata();
@@ -33,6 +35,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
+        <link
+          rel='preload'
+          as='image'
+          href='/img/pokenext_logo.webp'
+          fetchPriority='high'
+        />
         <Script
           id='jsonld-website'
           type='application/ld+json'

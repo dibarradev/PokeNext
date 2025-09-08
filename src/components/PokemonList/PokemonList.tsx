@@ -186,6 +186,8 @@ export function PokemonList() {
       width={300}
       height={93}
       className={styles.siteLogo}
+      priority={true}
+      fetchPriority='high'
     />
   );
 
