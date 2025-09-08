@@ -56,8 +56,8 @@
 .sortResultsContainer {
   display: flex;
   flex-direction: column;
-  margin-block-start: $spacing-lg;
-  margin-block-end: $spacing-lg;
+  margin-block-start: $spacing-md;
+  margin-block-end: $spacing-xl;
 
   @media (min-width: $breakpoint-tablet) {
     flex-direction: row;
@@ -71,8 +71,14 @@
   align-items: center;
   justify-content: space-between;
   gap: $spacing-sm;
-  // margin-block-start: $spacing-lg;
-  // margin-block-end: $spacing-lg;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  legend {
+    padding: 0;
+    margin: 0;
+  }
 
   @include mobile {
     flex-wrap: wrap;
@@ -166,6 +172,14 @@
 
 .types {
   margin-block-start: $spacing-lg;
+  border: none;
+  padding: 0;
+  margin-inline: 0;
+
+  legend {
+    padding: 0;
+    margin-bottom: 0;
+  }
 }
 
 .typesHeader {
@@ -173,6 +187,10 @@
   justify-content: space-between;
   align-items: center;
   margin-block-end: $spacing-sm;
+
+  legend {
+    width: auto;
+  }
 }
 
 .typesList {
