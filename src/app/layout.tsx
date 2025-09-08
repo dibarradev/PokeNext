@@ -35,12 +35,22 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
+        {/* Preconnections for external APIs*/}
+        <link
+          rel='preconnect'
+          href='https://pokeapi.co'
+          crossOrigin='anonymous'
+        />
+        <link rel='dns-prefetch' href='https://pokeapi.co' />
+
+        {/* Preloading critical resources */}
         <link
           rel='preload'
           as='image'
           href='/img/pokenext_logo.webp'
           fetchPriority='high'
         />
+
         <Script
           id='jsonld-website'
           type='application/ld+json'
